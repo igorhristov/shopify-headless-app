@@ -1,6 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Grid, Image, Text, Button, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Image,
+  Text,
+  Button,
+  Heading,
+  Flex,
+} from "@chakra-ui/react";
 import { ShopContext } from "../context/shopContext";
 
 const ProductPage = () => {
@@ -16,17 +24,38 @@ const ProductPage = () => {
 
   if (!product.title) return <div>Loading...</div>;
   return (
-    <Box>
-      <Grid templateColumns="repeat(2, 1fr)">
-        <Image src={product.images[0].src} />
-        <Box>
-          <Heading>{product.title}</Heading>
-          <Text>${product.variants[0].price}</Text>
-          <Text>{product.description}</Text>
-          <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)}>
+    <Box p="2rem">
+      <Grid
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]}
+        margin="auto"
+      >
+        <Flex
+          px="2rem"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Image src={product.images[0].src} />
+        </Flex>
+        <Flex flexDirection="column" alignItems="center">
+          <Heading pb="2rem">{product.title}</Heading>
+          <Text fontWeight="bold" pb="2rem">
+            ${product.variants[0].price}
+          </Text>
+          <Text color="gray.500" pb="2rem">
+            {product.description}
+          </Text>
+          <Button
+            onClick={() => addItemToCheckout(product.variants[0].id, 1)}
+            _hover={{ opacity: "70%" }}
+            w="10rem"
+            backgroundColor="#FF38BD"
+            color="white"
+            textTransform="uppercase"
+          >
             Add to Cart
           </Button>
-        </Box>
+        </Flex>
       </Grid>
     </Box>
   );

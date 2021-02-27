@@ -5,12 +5,14 @@ import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
+import NavMenu from "./components/NavMenu";
 const App = () => {
   return (
     <div>
       <Router>
         <Navbar />
         <Cart />
+        <NavMenu />
         <Switch>
           <Route exact path="/">
             <Home />

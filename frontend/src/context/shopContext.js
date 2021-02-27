@@ -81,9 +81,13 @@ export class ShopProvider extends Component {
     this.setState({ isCartOpen: true });
   };
 
-  closeMenu = () => {};
+  closeMenu = () => {
+    this.setState({ isMenuOpen: false });
+  };
 
-  openMenu = () => {};
+  openMenu = () => {
+    this.setState({ isMenuOpen: true });
+  };
 
   render() {
     return (

@@ -14,6 +14,7 @@ import {
   Flex,
   Image,
   Link,
+  Box,
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
@@ -24,14 +25,19 @@ const Cart = () => {
 
   return (
     <>
-      <Drawer isOpen={isCartOpen} placement="right" onClose={closeCart}>
+      <Drawer
+        isOpen={isCartOpen}
+        placement="right"
+        onClose={closeCart}
+        size="md"
+      >
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
             <DrawerHeader>Your Shoping Cart</DrawerHeader>
 
             <DrawerBody>
-              {checkout.lineItems &&
+              {checkout.lineItems?.length ? (
                 checkout.lineItems.map((item) => (
                   <Grid templateColumns="repeat(4,1fr)" gap={1} key={item.id}>
                     <Flex alignItems="center" justifyContent="center">
@@ -50,16 +56,31 @@ const Cart = () => {
                       <Text>{item.variant.price}</Text>
                     </Flex>
                   </Grid>
-                ))}
+                ))
+              ) : (
+                <Box h="100%" w="100%">
+                  <Text
+                    h="100%"
+                    display="flex"
+                    flexDir="column"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    Your Cart is Empty!!!
+                  </Text>
+                </Box>
+              )}
             </DrawerBody>
 
-            <DrawerFooter>
-              <Button w="100%">
-                <Link w="100%" href={checkout.webUrl}>
-                  Checkout
-                </Link>
-              </Button>
-            </DrawerFooter>
+            {checkout.lineItems?.length ? (
+              <DrawerFooter>
+                <Button w="100%">
+                  <Link w="100%" href={checkout.webUrl}>
+                    Checkout
+                  </Link>
+                </Button>
+              </DrawerFooter>
+            ) : null}
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>

@@ -13,7 +13,7 @@ const Hero = () => {
       />
       <Text
         position="absolute"
-        botom="20%"
+        bottom="20%"
         w="100%"
         textAlign="center"
         color="white"
